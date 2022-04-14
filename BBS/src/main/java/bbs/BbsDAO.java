@@ -3,7 +3,7 @@ package bbs;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;			//외부 라이브러리로 가져올 수 있게함.
-import java.sql.ResultSet; 
+import java.sql.ResultSet;
 import java.util.ArrayList;        
 
 public class BbsDAO {
@@ -87,6 +87,7 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
+				bbs.setBbsCount(rs.getInt(7));
 				list.add(bbs);
 			}
 		} catch (Exception e) {
@@ -125,12 +126,30 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
+				int bbsCount=rs.getInt(7);
+				bbs.setBbsCount(bbsCount);
+				bbsCount++;
+				countUpdate(bbsCount,bbsID);
 				return bbs;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private int countUpdate(int bbsCount, int bbsID) {
+		// TODO Auto-generated method stub
+		String SQL = "update bbs set bbsCount = ? where bbsID = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsCount);
+			pstmt.setInt(2, bbsID);
+			return pstmt.executeUpdate();//
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
 	}
 	
 	public int update(int bbsID, String bbsTitle, String bbsContent) { // 글쓰기 수정 함수

@@ -8,7 +8,14 @@ public class Bbs {
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable; //현재 글이 삭제됐는지 알려주는 용도, bbsAvailable 값이 1이면 글이 있음 0이면 글이 삭제
+	private int bbsCount; // + 조회 수 카운트 기능을 추가함
 	
+	public int getBbsCount() {
+		return bbsCount;
+	}
+	public void setBbsCount(int bbsCount) {
+		this.bbsCount = bbsCount;
+	}
 	public int getBbsID() {
 		return bbsID;
 	}
