@@ -13,12 +13,10 @@
 </head>
 <body>
 	<%           // 로그인 정보를 담을 수 있게 해줌
-		String userID = null;      
+		String userID = null; //참조형 변수의 기본 값 
 		if(session.getAttribute("userID") != null) {
 			userID = (String)session.getAttribute("userID");
 		}
-	
-	
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -39,7 +37,6 @@
 			<%-- ul리스트 같은거 보여줄 때 주로 사용 --%>
 			<%
 				if(userID == null) {
-				
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
