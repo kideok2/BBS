@@ -72,6 +72,7 @@
 					aria-expanded="false">회원관리<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="logoutAction.jsp">로그아웃</a></li>
+						<li><a href="userUpdate.jsp">내 정보</a></li>
 					</ul>
 				</li>	
 			</ul>
@@ -79,11 +80,11 @@
 	</nav>
 	<div class="container">
 		<div class="fow">
-			<form method="post" action="updateAction.jsp?bbsID=<%= bbsID %>">
+			<form method="post" action="updateAction.jsp?bbsID=<%= bbsID %>"><%--업데이트 요청 시 요청을 처리하는 액션 페이지 시작 --%>
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color : #eeeeee; text-align: center;">게시판 글 수정 양식</th>
+							<th colspan="2" style="background-color : #99ffcc; text-align: center;">게시판 글 수정 양식</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,7 +98,7 @@
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글 수정">
-			</form>
+			</form><%-- 끝 --%>
 		</div>
 	</div>	
 	

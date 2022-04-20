@@ -55,7 +55,6 @@
 			<%-- ul리스트 같은거 보여줄 때 주로 사용 --%>
 			<%
 				if(userID == null) {
-				
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -78,6 +77,7 @@
 					aria-expanded="false">회원관리<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="logoutAction.jsp">로그아웃</a></li>
+						<li><a href="userUpdate.jsp">내 정보</a></li>
 					</ul>
 				</li>	
 			</ul>
@@ -91,7 +91,7 @@
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3" style="background-color : #eeeeee; text-align: center;">게시판 글 보기</th>
+						<th colspan="3" style="background-color : #99ffcc; text-align: center;">게시판 글 보기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -118,13 +118,26 @@
 					</tr>
 				</tbody>
 			</table>
+			<%-- 목록 수정 삭제 (시작)--%>
+			<a href="bbs.jsp" class="btn btn-primary">목록</a>
+			<%
+				if(userID != null && userID.equals(bbs.getUserID())) {
+			%>		
+					<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-warning">수정</a>			
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-danger">삭제</a>	
+			<%
+				}
+			%>
+			<br><br>
+			<%-- 목록 수정 삭제 (끝)--%>
+
 			<div class="container"> <%-- 게시판 댓글 부분 시작~ --%>
 				<div class="row">
 					<table class="table table-striped"
 						style="text-align: center; border: 1px solid #dddddd">
 						<tbody>
 							<tr>
-								<td align="left" bgcolor="skyblue">댓글</td>
+								<td align="left" bgcolor="#ccccff">댓글</td>
 							</tr>
 							<tr>
 								<%
@@ -141,7 +154,7 @@
 													<td align="left"><%=list.get(i).getUserID()%></td>
 
 													<td align="right"><%=list.get(i).getCommentDate().substring(0, 11) + list.get(i).getCommentDate().substring(11, 13)
-						+ "시" + list.get(i).getCommentDate().substring(14, 16) + "분"%></td>
+														+ "시" + list.get(i).getCommentDate().substring(14, 16) + "분"%></td>
 												</tr>
 
 												<tr>
@@ -188,16 +201,6 @@
 		</div>
 	</div>	
 		 <%-- 게시판 댓글 부분 ~끝 --%>
-			<a href="bbs.jsp" class="btn btn-primary">목록</a>
-			<%
-				if(userID != null && userID.equals(bbs.getUserID())) {
-			%>		
-					<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">수정</a>			
-					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-primary">삭제</a>			
-			<%
-				}
-			%>
-		
 	
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script><%-- 가져다가 씀 --%>
 	<script src="js/bootstrap.js"></script>

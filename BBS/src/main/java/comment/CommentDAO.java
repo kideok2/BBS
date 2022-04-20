@@ -55,8 +55,8 @@ public class CommentDAO {
 		return -1;//데이터베이스 오류
 	}
 //--------------------------
-	public int getNext() { // "댓글 번호" 카운트 업업
-		String SQL ="SELECT commentID FROM COMMENT ORDER BY commentID DESC";
+	public int getNext() { // "댓글 번호" 카운트 업업        // 마지막 게시물 반환?
+		String SQL ="SELECT commentID FROM COMMENT ORDER BY commentID DESC"; 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();

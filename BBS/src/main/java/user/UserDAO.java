@@ -62,5 +62,55 @@ public class UserDAO { //데이터 베이스의 접근객체의 약자
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
-	}	
+	}
+//===========================================
+	public User getUser(String userID) {//하나의 글 내용을 불러오는 함수
+		String SQL="SELECT * from USER where userID = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);//물음표
+			rs=pstmt.executeQuery();//select
+			if(rs.next()) {//결과가 있다면
+				User user = new User();
+				user.setUserID(rs.getString(1));//첫 번째 결과 값
+				user.setUserPassword(rs.getString(2));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserEmail(rs.getString(5));
+				return user;//6개의 항목을 user인스턴스에 넣어 반환한다.
+			}			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+//--------------------------------------- 회원 정보 수정
+	public int update(String userID, String userPassword, String userName, String userGender, String userEmail ) {
+		String SQL="update user set userPassword = ?, userName = ?, userGender = ?, userEmail = ? where userID = ?"; 
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, userPassword);
+			pstmt.setString(2, userName);
+			pstmt.setString(3, userGender);
+			pstmt.setString(4, userEmail);
+			pstmt.setString(5, userID);
+			return pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;//데이터베이스 오류
+	}
+//================================== 회원탈퇴
+	public int delete(String userID) {
+		String SQL="delete from user where userID = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;//데이터베이스 오류
+	}
+	
 }
