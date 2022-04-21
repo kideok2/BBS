@@ -16,6 +16,8 @@
 		String userID = null; //참조형 변수의 기본 값 
 		if(session.getAttribute("userID") != null) {
 			userID = (String)session.getAttribute("userID");
+			
+		
 		}
 	%>
 	<nav class="navbar navbar-default">
