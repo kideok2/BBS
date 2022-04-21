@@ -32,17 +32,15 @@
 			script.println("history.back()");
 			script.println("</script>");
 		} else {  // 그 밖에 다른 오류들 모두(DB연결 오류, 코드 오타 등 등)
-			
 			BbsDAO bbsDAO = new BbsDAO();
-			int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent());
+			int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsCount());
 			if(result == -1) {  // -1은 DB오류
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('글쓰기에 실패 했습니다.')");
+				script.println("alert('글쓰기에 실패 했습니다 원인이 뭐야.')");
 				script.println("history.back()");
 				script.println("</script>");
-			} 
-			else { 
+			} else { 
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("location.href = 'bbs.jsp'");
@@ -50,7 +48,6 @@
 			} 
 		}
 	}
-		
 	%>
 </body>
 </html>

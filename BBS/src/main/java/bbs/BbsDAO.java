@@ -51,8 +51,8 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 //=======================================ㅇㅇ
-	public int write(String bbsTitle, String userID, String bbsContent) {
-		String SQL ="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?)";
+	public int write(String bbsTitle, String userID, String bbsContent, int bbsCount) {
+		String SQL ="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
@@ -61,6 +61,7 @@ public class BbsDAO {
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1);
+			pstmt.setInt(7, bbsCount);
 			return pstmt.executeUpdate(); // 성공적으로 수행하면 0이상의 숫자 리턴
 		} catch (Exception e) {
 			e.printStackTrace();
